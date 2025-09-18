@@ -135,3 +135,204 @@ html {
 .fade-in {
 	animation: fadeIn 0.6s ease-out;
 }
+
+/* Scroll Story Styles */
+.scroll-story {
+	position: relative;
+	z-index: 1;
+}
+
+.scroll-section {
+	position: relative;
+	z-index: 1;
+}
+
+.scroll-section--pinned {
+	height: 100vh;
+	overflow: hidden;
+}
+
+.scroll-section--tall {
+	height: 200vh; /* Creates scroll distance for pinned content */
+}
+
+/* Progress bar */
+.progress-bar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 4px;
+	height: 100vh;
+	background: rgba(255, 255, 255, 0.1);
+	z-index: 50;
+}
+
+.progress-bar__fill {
+	width: 100%;
+	height: 0%;
+	background: linear-gradient(to bottom, var(--accent), var(--accent-hover));
+	transition: height 0.1s ease-out;
+}
+
+/* Video optimization */
+.scroll-video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+	will-change: transform;
+}
+
+.will-change-auto {
+	will-change: auto;
+}
+
+/* Parallax layers */
+.parallax-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Word reveal */
+.word-reveal {
+	overflow: hidden;
+	display: inline-block;
+}
+
+.word-reveal__inner {
+	display: inline-block;
+	transform: translateY(100%);
+	white-space: nowrap;
+}
+
+/* Accent underline */
+.accent-underline {
+	position: relative;
+}
+
+.accent-underline::after {
+	content: '';
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: var(--accent);
+	transition: width 0.8s ease-out;
+}
+
+.accent-underline--active::after {
+	width: 100%;
+}
+
+/* Card assembly animations */
+.feature-card {
+	transform: scale(0.8) rotate(-5deg);
+	opacity: 0;
+	transition: all 0.6s ease-out;
+}
+
+.feature-card--assembled {
+	transform: scale(1) rotate(0deg);
+	opacity: 1;
+}
+
+/* Horizontal scroll container */
+.horizontal-scroll {
+	display: flex;
+	will-change: transform;
+}
+
+.horizontal-scroll__item {
+	flex-shrink: 0;
+	width: 400px;
+	margin-right: 2rem;
+}
+
+/* Logo split animation */
+.logo-split {
+	position: relative;
+	overflow: hidden;
+}
+
+.logo-split__char {
+	display: inline-block;
+	transition: all 0.3s ease-out;
+}
+
+.logo-split--active .logo-split__char:nth-child(odd) {
+	transform: translateX(-10px);
+}
+
+.logo-split--active .logo-split__char:nth-child(even) {
+	transform: translateX(10px);
+}
+
+/* Glow effect */
+.glow-effect {
+	position: relative;
+}
+
+.glow-effect::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 120%;
+	height: 120%;
+	background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+	opacity: 0;
+	transform: translate(-50%, -50%);
+	transition: opacity 0.5s ease-out;
+	pointer-events: none;
+	z-index: -1;
+}
+
+.glow-effect--active::before {
+	opacity: 0.2;
+}
+
+/* Gradient utilities */
+.bg-gradient-radial {
+	background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+	.scroll-section--pinned {
+		height: auto;
+	}
+	
+	.will-change-transform {
+		will-change: auto;
+	}
+	
+	.word-reveal__inner {
+		transform: none;
+	}
+	
+	.feature-card {
+		transform: none;
+		opacity: 1;
+	}
+	
+	.logo-split__char {
+		transform: none !important;
+	}
+	
+	.scroll-video {
+		/* Pause videos for reduced motion */
+		animation-play-state: paused;
+	}
+}
